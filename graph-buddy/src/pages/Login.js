@@ -7,7 +7,7 @@ import Auth from '../utils/auth';
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login] = useMutation(LOGIN_USER);
+  const [login, { error, data }] = useMutation(LOGIN_USER);
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -84,6 +84,11 @@ const Login = (props) => {
           >
             Submit
           </Button>
+          {error && (
+              <div className="my-3 p-3 bg-danger text-white">
+                {error.message}
+              </div>
+            )}
         </Form>
         <br />
         <Card.Link href="/signup">Don't have an account? Sign Up!</Card.Link>
