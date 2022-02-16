@@ -1,4 +1,5 @@
 import React from 'react';
+import BarChart from '../components/Charts/BarChart'
 
 
 import Auth from '../utils/auth';
@@ -41,7 +42,7 @@ const Profile = () => {
         <br />
       <br />
       <br />
-      <br />
+      <BarChart/>
       <br />
       </div>
     </div>
