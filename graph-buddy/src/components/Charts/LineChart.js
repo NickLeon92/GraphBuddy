@@ -9,7 +9,7 @@ const LineChart = (props) => {
         labels: props.l,
         datasets: [
           {
-            label: '',
+            label: props.title,
             data: props.d,
           },
         ],

@@ -1,11 +1,11 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Graph } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find();
+      return User.find().populate('graphs');
     },
     user: async (parent, { username }) => {
       return User.findOne({ username });
@@ -41,6 +41,26 @@ const resolvers = {
 
       return { token, user };
     },
+    addGraph: async (parent, {userId, title }, context) => {
+      console.log("attempting to add graph for userId: ", userId)
+      const graph = await Graph.create({title})
+
+      await User.findOneAndUpdate(
+        {_id: userId},
+        {
+          $addToSet: {graphs: graph._id}
+        },
+        )
+      return graph
+    },
+    updateGraph: async (parent, {graphId, labels, data}) => {
+      return await Graph.findOneAndUpdate(
+        {_id: graphId},
+        {
+          $addToSet: {labels: labels, data: data}
+        },
+      )
+    }
   },
 };
 

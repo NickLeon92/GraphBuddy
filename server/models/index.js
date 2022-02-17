@@ -1,3 +1,3 @@
 const User = require('./User');
-
-module.exports = { User };
+const Graph = require('./Graph')
+module.exports = { User, Graph };

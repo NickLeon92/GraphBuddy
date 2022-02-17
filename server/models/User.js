@@ -19,6 +19,10 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  graphs: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Graph'
+  }]
 });
 
 userSchema.pre('save', async function (next) {
