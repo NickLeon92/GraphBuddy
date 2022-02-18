@@ -8,11 +8,11 @@ const resolvers = {
       return User.find().populate('graphs');
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username });
+      return User.findOne({ username }).populate('graphs');
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        return User.findOne({ _id: context.user._id }).populate('graphs');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -45,13 +45,13 @@ const resolvers = {
       console.log("attempting to add graph for userId: ", userId)
       const graph = await Graph.create({title})
 
-      await User.findOneAndUpdate(
+      return await User.findOneAndUpdate(
         {_id: userId},
         {
-          $addToSet: {graphs: graph._id}
+          $addToSet: {graphs: graph}
         },
         )
-      return graph
+      
     },
     updateGraph: async (parent, {graphId, labels, data}) => {
       return await Graph.findOneAndUpdate(
