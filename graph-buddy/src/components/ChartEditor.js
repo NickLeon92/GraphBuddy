@@ -3,26 +3,19 @@ import { v4 as uuidv4 } from 'uuid'
 import {Container, Form, Button, FormGroup} from 'react-bootstrap'
 import LineChart from './Charts/LineChart';
 
-const ChartEditor = ({currentGraph, setCurrentGraph, setGraphHistory, graphHistory}) => {
+const ChartEditor = ({currentGraph, setCurrentGraph, setGraphHistory, graphHistory, title, setTitle}) => {
     const [x, setX] = useState('')
     const [y, setY] = useState('')
   
-    // const [l, setLabels] = useState([])
-    // const [d, setData] = useState([])
-    const [title, setTitle] = useState('')
-  
     const handleGraph = (e) => {
       e.preventDefault()
-      if(x !== '' && y && title !==''){
-          const check = graphHistory.map(el => el.title)
-        // let newlabels = [...l,x]
-        // let newdata = [...d,y]
-        // setLabels(newlabels)
-        // setData(newdata)
+      if(title !==''){
 
         const updatedGraph = {...currentGraph}
-        updatedGraph.labels.push(x)
-        updatedGraph.data.push(y)
+        if(x !== '' && y !== ''){
+          updatedGraph.labels.push(x)
+          updatedGraph.data.push(y)
+        }
         updatedGraph.title = title
 
         setCurrentGraph(updatedGraph)
@@ -41,6 +34,7 @@ const ChartEditor = ({currentGraph, setCurrentGraph, setGraphHistory, graphHisto
                     return el
                 }
             })
+            setGraphHistory(updatedArr)
         }
 
 

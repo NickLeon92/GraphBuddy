@@ -21,6 +21,7 @@ const Profile = () => {
     data:[]
     })
   const [graphHistory, setGraphHistory] = useState([])
+  const [title, setTitle] = useState('')
 
   useEffect(() => {
     if(!loading){
@@ -37,6 +38,7 @@ const Profile = () => {
       labels:[],
       data:[]
       })
+      setTitle('')
   }
 
   if (!Auth.loggedIn()) {
@@ -73,12 +75,18 @@ const Profile = () => {
           {!loading && graphHistory.map((el) => (
               <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}} key={el._id}>
                 <p>{el.title}: {el.labels.length} data points</p>
-                <Button variant="success">Update</Button>
+                <Button 
+                variant="success"
+                onClick={() => {
+                  setCurrentGraph(el)
+                  setTitle(el.title)
+                }}
+                >Update</Button>
                 <Button 
                 variant="danger"
                 onClick={() => {
-                  let thisTitle = el.title
-                  const filteredArr = graphHistory.filter((el) => el.title !== thisTitle)
+                  let thisId = el.id
+                  const filteredArr = graphHistory.filter((el) => el.id !== thisId)
               
                   setGraphHistory(filteredArr)
                 }}
@@ -88,7 +96,7 @@ const Profile = () => {
         </Offcanvas.Body>
       </Offcanvas>
 
-      <ChartEditor currentGraph={currentGraph} setCurrentGraph={setCurrentGraph} setGraphHistory={setGraphHistory} graphHistory={graphHistory}/>
+      <ChartEditor currentGraph={currentGraph} setCurrentGraph={setCurrentGraph} setGraphHistory={setGraphHistory} graphHistory={graphHistory} title={title} setTitle={setTitle}/>
 
     </div>
   );
