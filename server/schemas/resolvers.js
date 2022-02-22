@@ -1,4 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
+const { GraphQLSpecifiedByDirective } = require('graphql');
 const { User, Graph } = require('../models');
 const { signToken } = require('../utils/auth');
 
@@ -41,26 +42,24 @@ const resolvers = {
 
       return { token, user };
     },
-    addGraph: async (parent, {userId, title }, context) => {
-      console.log("attempting to add graph for userId: ", userId)
-      const graph = await Graph.create({title})
+    // addGraph: async (parent, {userId, title }, context) => {
+    //   console.log("attempting to add graph for userId: ", userId)
+    //   const graph = await Graph.create({title})
 
-      return await User.findOneAndUpdate(
-        {_id: userId},
-        {
-          $addToSet: {graphs: graph}
-        },
-        )
+    //   return await User.findOneAndUpdate(
+    //     {_id: userId},
+    //     {
+    //       $addToSet: {graphs: graph}
+    //     },
+    //     )
       
+    // },
+    addGraph: async (parent, {id, title, labels, data}, context) => {
+      console.log(  `attempting to add graph with id:${id}, title: ${title}, data: ( ${labels}, ${data} )`)
     },
-    updateGraph: async (parent, {graphId, labels, data}) => {
-      return await Graph.findOneAndUpdate(
-        {_id: graphId},
-        {
-          $addToSet: {labels: labels, data: data}
-        },
-      )
-    }
+    updateGraph: async (parent, {id, title, labels, data}, context) => {
+
+    },
   },
 };
 

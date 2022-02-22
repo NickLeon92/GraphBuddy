@@ -8,6 +8,7 @@ export const QUERY_ME = gql`
       email
       graphs {
         _id
+        id
         title
         labels
         data

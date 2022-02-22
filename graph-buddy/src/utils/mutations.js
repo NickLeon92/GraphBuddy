@@ -24,33 +24,26 @@ export const ADD_USER = gql`
   }
 `;
 
-export const ADD_THOUGHT = gql`
-  mutation addThought($thoughtText: String!) {
-    addThought(thoughtText: $thoughtText) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
+export const UPDATE_GRAPH = gql`
+  mutation updateGraph($graphId:String, $title:String, $labels:String, $data:Int){
+    updateGraph(graphId:$graphId, title:$title, labels:$labels, data:$data){
+      username
+      graphs{
+        title
       }
     }
   }
-`;
+`
 
-export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        createdAt
+export const REMOVE_GRAPH = gql`
+  mutation removeGraph($graphId:String){
+    removeGraph(graphId:$graphId){
+      username
+      graphs{
+        id
+        title
       }
     }
   }
-`;
+`
+;

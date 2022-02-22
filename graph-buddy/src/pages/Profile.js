@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import {useQuery} from '@apollo/client'
+import {useQuery, useMutation} from '@apollo/client'
 import {QUERY_ME} from '../utils/queries'
+import {REMOVE_GRAPH} from '../utils/mutations'
 import {Form, Button, Offcanvas} from 'react-bootstrap'
 import LineChart from '../components/Charts/LineChart'
 import ChartEditor from '../components/ChartEditor';
@@ -11,6 +12,7 @@ import Auth from '../utils/auth';
 const Profile = () => {
 
   const {loading, data} = useQuery(QUERY_ME)
+  const [removeGraph] = useMutation(REMOVE_GRAPH)
   const graphData = data?.me || {}
 
   const [show, setShow] = useState(false);
@@ -80,6 +82,7 @@ const Profile = () => {
                 onClick={() => {
                   setCurrentGraph(el)
                   setTitle(el.title)
+                  console.log(graphHistory)
                 }}
                 >Update</Button>
                 <Button 
@@ -89,6 +92,17 @@ const Profile = () => {
                   const filteredArr = graphHistory.filter((el) => el.id !== thisId)
               
                   setGraphHistory(filteredArr)
+
+                  // try{
+                  //   const {data} = await removeGraph({
+                  //     variables: {
+                  //       graphId: thisId
+                  //     }
+                  //   })
+                  //   console.log(data)
+                  // }catch(err){
+                  //   console.log(err)
+                  // }
                 }}
                 >Delete</Button>
               </div>)
