@@ -11,7 +11,7 @@ const typeDefs = gql`
 
   type Graph {
     _id: ID
-    id: String!
+    id: String
     title: String
     labels: [String]
     data: [Int]
@@ -31,8 +31,8 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addGraph(id:String, title:String, labels:String, data:Int):User
-    updateGraph(id:String, title:String, labels:String, data:Int):Graph
+    addGraph(id:String, title:String, labels:String, data:String):User
+    updateGraph(id:String, title:String, labels:String, data:String):Graph
     removeGraph(graphId:String): User
   }
 `;

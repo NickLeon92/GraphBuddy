@@ -14,7 +14,7 @@ const graphSchema = new Schema ({
         type: String
     }],
     data:[{
-        type: Number
+        type: String
     }]
 })
 

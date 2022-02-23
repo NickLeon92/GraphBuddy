@@ -82,7 +82,7 @@ const Profile = () => {
                 onClick={() => {
                   setCurrentGraph(el)
                   setTitle(el.title)
-                  console.log(graphHistory)
+                  console.log(el)
                 }}
                 >Update</Button>
                 <Button 

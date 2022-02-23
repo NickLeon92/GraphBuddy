@@ -42,23 +42,55 @@ const resolvers = {
 
       return { token, user };
     },
-    // addGraph: async (parent, {userId, title }, context) => {
-    //   console.log("attempting to add graph for userId: ", userId)
-    //   const graph = await Graph.create({title})
 
-    //   return await User.findOneAndUpdate(
-    //     {_id: userId},
-    //     {
-    //       $addToSet: {graphs: graph}
-    //     },
-    //     )
-      
-    // },
     addGraph: async (parent, {id, title, labels, data}, context) => {
-      console.log(  `attempting to add graph with id:${id}, title: ${title}, data: ( ${labels}, ${data} )`)
-    },
-    updateGraph: async (parent, {id, title, labels, data}, context) => {
+      console.log(  `attempting to add graph with
+       id:${id}, 
+       title: ${title}, 
+       data: ( ${labels}, ${data} )`)
+       let newGraph = await Graph.create({
+         id:id,
+         title:title
+       });
+       if (labels !=='N/A'){
+         newGraph = await Graph.findOneAndUpdate(
+           {_id: newGraph._id},
+           {
+             $push: {labels:labels, data:parseInt(data)}
+           }
+         )
+       }
 
+       return await User.findOneAndUpdate(
+         {_id: context.user._id},
+         {
+           $push:{ graphs: newGraph }
+         }
+       )
+    },
+    updateGraph: async (parent, {id, title, labels, data}) => {
+      console.log(  `attempting to update graph with 
+       id:${id}, 
+       title: ${title}, 
+       data: ( ${labels}, ${data} )`)
+
+      let updatedGraph = await Graph.findOneAndUpdate(
+        {id: id},
+        {
+          $set: {title: title}
+        }
+        )
+
+      if(labels !== 'N/A'){
+        updatedGraph = await Graph.findOneAndUpdate(
+          {_id:updatedGraph._id},
+          {
+            $push: { labels: labels, data:parseInt(data) },
+          },
+          {new:true, multi:true}
+        )
+      }
+      return updatedGraph
     },
   },
 };

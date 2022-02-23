@@ -24,15 +24,31 @@ export const ADD_USER = gql`
   }
 `;
 
-export const UPDATE_GRAPH = gql`
-  mutation updateGraph($graphId:String, $title:String, $labels:String, $data:Int){
-    updateGraph(graphId:$graphId, title:$title, labels:$labels, data:$data){
+
+export const ADD_GRAPH = gql`
+  mutation addGraph($id: String, $title:String, $labels:String, $data:String){
+    addGraph(id:$id, title:$title, labels:$labels, data:$data){
+      _id
       username
       graphs{
+        id
         title
+        labels
+        data
       }
     }
   }
+`;
+
+export const UPDATE_GRAPH = gql`
+mutation updateGraph($id: String, $title:String, $labels:String, $data:String){
+  updateGraph(id:$id, title:$title, labels:$labels, data:$data){
+    id
+    title
+    labels
+    data
+  }
+}
 `
 
 export const REMOVE_GRAPH = gql`
