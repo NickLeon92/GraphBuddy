@@ -87,22 +87,22 @@ const Profile = () => {
                 >Update</Button>
                 <Button 
                 variant="danger"
-                onClick={() => {
+                onClick={async () => {
                   let thisId = el.id
                   const filteredArr = graphHistory.filter((el) => el.id !== thisId)
               
                   setGraphHistory(filteredArr)
 
-                  // try{
-                  //   const {data} = await removeGraph({
-                  //     variables: {
-                  //       graphId: thisId
-                  //     }
-                  //   })
-                  //   console.log(data)
-                  // }catch(err){
-                  //   console.log(err)
-                  // }
+                  try{
+                    const {data} = await removeGraph({
+                      variables: {
+                        id: thisId
+                      }
+                    })
+                    console.log(data)
+                  }catch(err){
+                    console.log(err)
+                  }
                 }}
                 >Delete</Button>
               </div>)

@@ -72,8 +72,8 @@ const ChartEditor = ({currentGraph, setCurrentGraph, setGraphHistory, graphHisto
                 variables: {
                   id: currentGraph.id,
                   title: title,
-                  labels: labelsRef.current.value,
-                  data:  dataRef.current.value,
+                  labels: db_X,
+                  data:  db_Y,
                 }
               })
               console.log(data)

@@ -52,13 +52,9 @@ mutation updateGraph($id: String, $title:String, $labels:String, $data:String){
 `
 
 export const REMOVE_GRAPH = gql`
-  mutation removeGraph($graphId:String){
-    removeGraph(graphId:$graphId){
-      username
-      graphs{
-        id
-        title
-      }
+  mutation removeGraph($id:String){
+    removeGraph(id:$id){
+      id
     }
   }
 `

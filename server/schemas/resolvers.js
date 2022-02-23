@@ -92,6 +92,12 @@ const resolvers = {
       }
       return updatedGraph
     },
+    removeGraph: async (parent, {id}) => {
+      console.log(`attempting to remove graph: ${id}`)
+      return await Graph.findOneAndDelete(
+        {id: id},
+      )
+    }
   },
 };
 

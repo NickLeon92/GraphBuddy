@@ -33,7 +33,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addGraph(id:String, title:String, labels:String, data:String):User
     updateGraph(id:String, title:String, labels:String, data:String):Graph
-    removeGraph(graphId:String): User
+    removeGraph(id:String): Graph
   }
 `;
 
