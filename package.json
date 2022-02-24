@@ -8,7 +8,7 @@
     "develop": "concurrently \"cd server && npm run watch\" \"cd graph-buddy && npm start\"",
     "install": "cd server && npm i && cd ../graph-buddy && npm i",
     "seed": "cd server && npm run seed",
-    "build": "cd graphy-buddy && npm run build"
+    "build": "cd graph-buddy && npm run build"
   },
   "keywords": [],
   "author": "",
