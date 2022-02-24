@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {useQuery, useMutation} from '@apollo/client'
 import {QUERY_ME} from '../utils/queries'
 import {REMOVE_GRAPH} from '../utils/mutations'
-import {Form, Button, Offcanvas} from 'react-bootstrap'
+import {Form, Button, Offcanvas, Container, Row, Col} from 'react-bootstrap'
 import LineChart from '../components/Charts/LineChart'
 import ChartEditor from '../components/ChartEditor';
 
@@ -71,12 +71,19 @@ const Profile = () => {
 
       <Offcanvas show={show} onHide={handleClose}  placement={'end'}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          <Offcanvas.Title>Saved Graphs</Offcanvas.Title>
         </Offcanvas.Header>
+
         <Offcanvas.Body>
+
           {!loading && graphHistory.map((el) => (
-              <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}} key={el._id}>
-                <p>{el.title}: {el.labels.length} data points</p>
+              <Container id='canvas_row' style={el.id === currentGraph.id?{borderColor:'#00BFFF', backgroundColor:'#00BFFF'}:{borderColor:'black'}} key={el._id}>
+                <Col xs={6}>
+                <p style={{fontWeight:'bold', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}}>{el.title}</p>
+                <p>{el.labels.length} data points</p>
+                </Col>
+
+                <Col>
                 <Button 
                 variant="success"
                 onClick={() => {
@@ -85,6 +92,9 @@ const Profile = () => {
                   console.log(el)
                 }}
                 >Update</Button>
+                </Col>
+
+                <Col>
                 <Button 
                 variant="danger"
                 onClick={async () => {
@@ -105,8 +115,10 @@ const Profile = () => {
                   }
                 }}
                 >Delete</Button>
-              </div>)
+                </Col>
+              </Container>)
             )}
+
         </Offcanvas.Body>
       </Offcanvas>
 

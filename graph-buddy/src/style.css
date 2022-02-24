@@ -1,0 +1,9 @@
+#canvas_row{
+    display:flex;
+    border:solid; 
+    margin:10px; 
+    padding:1rem; 
+    border-width:thin; 
+    border-radius:1rem;
+    align-items: center;
+}

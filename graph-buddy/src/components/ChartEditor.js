@@ -122,12 +122,12 @@ const ChartEditor = ({currentGraph, setCurrentGraph, setGraphHistory, graphHisto
               onChange={(event) => setTitle(event.target.value)}
             />
             <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
+              Name your chart..
             </Form.Text>
           </Form.Group>
   
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>New Data Point</Form.Label>
+            <Form.Label>New Data Label</Form.Label>
             <Form.Control 
               type="text" 
               placeholder="Enter data point label..."
@@ -136,7 +136,7 @@ const ChartEditor = ({currentGraph, setCurrentGraph, setGraphHistory, graphHisto
               ref={labelsRef}
             />
             <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
+              Name this data entry... 
             </Form.Text>
           </Form.Group>
   
@@ -149,6 +149,9 @@ const ChartEditor = ({currentGraph, setCurrentGraph, setGraphHistory, graphHisto
               onChange={(event) => setY(event.target.value)}
               ref={dataRef}
             />
+            <Form.Text className="text-muted">
+              Enter value of data entry.. 
+            </Form.Text>
           </Form.Group>
   
           <Button 

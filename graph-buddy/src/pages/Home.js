@@ -11,7 +11,7 @@ const Home = () => {
       <br />
       <br />
       <h2>
-        Home Page :)
+        nothing here yet..
       </h2>
       <br />
       <br />
