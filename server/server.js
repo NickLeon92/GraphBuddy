@@ -4,7 +4,7 @@ const app = express();
 const publicPath = path.join(__dirname, '../graph-buddy/', 'build/');
 const port = process.env.PORT || 3000;
 
-const { ApolloServer, AuthenticationError } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
 const { User, Graph } = require('./models');
 const { signToken } = require('./utils/auth');
 // const { typeDefs, resolvers } = require('./schemas');
