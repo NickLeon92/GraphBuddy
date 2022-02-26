@@ -38,13 +38,21 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../graph-buddy/build')));
 }
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../graph-buddy/build/index.html'));
-});
+app.get('/', (req, res) => {
+  res.send('Server is up!')
+})
 
-db.once('open', () => {
-  app.listen(PORT, () => {
-    console.log(`API server running on port ${PORT}!`);
-    console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
-  });
-});
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../graph-buddy/build/index.html'));
+// });
+
+// db.once('open', () => {
+//   app.listen(PORT, () => {
+//     console.log(`API server running on port ${PORT}!`);
+//     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+//   });
+// });
