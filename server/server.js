@@ -1,37 +1,50 @@
-const express = require('express');
-const { ApolloServer } = require('apollo-server-express');
-const path = require('path');
+const express = require('express')
+const app = express()
+const port = process.env.PORT || 3000
 
-const { typeDefs, resolvers } = require('./schemas');
-const { authMiddleware } = require('./utils/auth');
+app.get('/', (req, res) => {
+  res.send('Server is up!')
+})
 
-const db = require('./config/connection');
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
 
-const PORT = process.env.PORT || 3001;
-const app = express();
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: authMiddleware,
-});
+// const express = require('express');
+// const { ApolloServer } = require('apollo-server-express');
+// const path = require('path');
 
-server.applyMiddleware({ app });
+// const { typeDefs, resolvers } = require('./schemas');
+// const { authMiddleware } = require('./utils/auth');
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+// const db = require('./config/connection');
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../graph-buddy/build')));
-}
+// const PORT = process.env.PORT || 3001;
+// const app = express();
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../graph-buddy/build/index.html'));
-});
+// const server = new ApolloServer({
+//   typeDefs,
+//   resolvers,
+//   context: authMiddleware,
+// });
 
-db.once('open', () => {
-  app.listen(PORT, () => {
-    console.log(`API server running on port ${PORT}!`);
-    console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
-  });
-});
+// server.applyMiddleware({ app });
+
+// app.use(express.urlencoded({ extended: false }));
+// app.use(express.json());
+
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(__dirname, '../graph-buddy/build')));
+// }
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../graph-buddy/build/index.html'));
+// });
+
+// db.once('open', () => {
+//   app.listen(PORT, () => {
+//     console.log(`API server running on port ${PORT}!`);
+//     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+//   });
+// });
