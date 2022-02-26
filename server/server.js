@@ -1,50 +1,42 @@
-const express = require('express')
-const app = express()
-const port = process.env.PORT || 3000
-
-// app.get('/', (req, res) => {
-//   res.send('Server is up!')
-// })
-
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`)
-// })
-
+const path = require('path');
+const express = require('express');
+const app = express();
+const publicPath = path.join(__dirname, '..', 'public');
+const port = process.env.PORT || 3000;
+app.use(express.static(publicPath));
+app.get('*', (req, res) => {
+   res.sendFile(path.join(publicPath, 'index.html'));
+});
+app.listen(port, () => {
+   console.log('Server is up!');
+});
 
 // const express = require('express');
-const { ApolloServer } = require('apollo-server-express');
-const path = require('path');
+// const { ApolloServer } = require('apollo-server-express');
+// const path = require('path');
 
-const { typeDefs, resolvers } = require('./schemas');
-const { authMiddleware } = require('./utils/auth');
+// const { typeDefs, resolvers } = require('./schemas');
+// const { authMiddleware } = require('./utils/auth');
 
-const db = require('./config/connection');
+// const db = require('./config/connection');
 
 // const PORT = process.env.PORT || 3001;
 // const app = express();
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: authMiddleware,
-});
+// const server = new ApolloServer({
+//   typeDefs,
+//   resolvers,
+//   context: authMiddleware,
+// });
 
-server.applyMiddleware({ app });
+// server.applyMiddleware({ app });
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+// app.use(express.json());
 
 // if (process.env.NODE_ENV === 'production') {
 //   app.use(express.static(path.join(__dirname, '../graph-buddy/build')));
 // }
-
-app.get('/', (req, res) => {
-  res.send('Server is up!')
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
 
 // app.get('*', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../graph-buddy/build/index.html'));
