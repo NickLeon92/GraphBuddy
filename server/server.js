@@ -5,9 +5,9 @@ const publicPath = path.join(__dirname, '../graph-buddy/', 'build/');
 const port = process.env.PORT || 3000;
 
 const { ApolloServer } = require('apollo-server-express');
-// const { typeDefs, resolvers } = require('./schemas');
-// const { authMiddleware } = require('./utils/auth');
-// const db = require('./config/connection');
+const { typeDefs, resolvers } = require('./schemas');
+const { authMiddleware } = require('./utils/auth');
+const db = require('./config/connection');
 // const server = new ApolloServer({
 //   typeDefs,
 //   resolvers,
