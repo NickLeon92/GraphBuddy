@@ -5,8 +5,8 @@ const port = process.env.PORT || 3000;
 
 const { ApolloServer } = require('apollo-server-express');
 const { signToken } = require('./utils/auth');
-const { Schema, model } = require('mongoose');
-const bcrypt = require('bcrypt');
+// const { Schema, model } = require('mongoose');
+// const bcrypt = require('bcrypt');
 // const { typeDefs, resolvers } = require('./schemas');
 const typeDefs = require('./schemas/typeDefs')
 // const resolvers = require('./schemas/resolvers')
