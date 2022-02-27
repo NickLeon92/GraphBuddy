@@ -1,29 +1,29 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const publicPath = path.join(__dirname, '../graph-buddy/', 'build/');
 const port = process.env.PORT || 3000;
 
 const { ApolloServer } = require('apollo-server-express');
 const { signToken } = require('./utils/auth');
-const { User, Graph } = require('../models');
+const User = require('./models/User');
 // const { typeDefs, resolvers } = require('./schemas');
 const typeDefs = require('./schemas/typeDefs')
 // const resolvers = require('./schemas/resolvers')
 const { authMiddleware } = require('./utils/auth');
 const db = require('./config/connection');
 // const server = new ApolloServer({
-//   typeDefs,
-//   resolvers,
-//   context: authMiddleware,
-// });
+  //   typeDefs,
+  //   resolvers,
+  //   context: authMiddleware,
+  // });
+  
+  // server.applyMiddleware({ app });
+  
+  // app.use(express.urlencoded({ extended: false }));
+  // app.use(express.json());
 
-// server.applyMiddleware({ app });
-
-// app.use(express.urlencoded({ extended: false }));
-// app.use(express.json());
-
-
+  
+const publicPath = path.join(__dirname, '../graph-buddy/', 'build/');
 
 app.use(express.static(publicPath));
 app.get('*', (req, res) => {
