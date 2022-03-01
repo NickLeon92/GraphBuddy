@@ -1,2 +1,6 @@
 # GraphBuddy
-create and save time dependent graphs with whatever y axis units you desire
+create and save line graphs.
+
+Here's the link to the deployed beta: https://graph-buddy.herokuapp.com
+
+<img src='./images/pic1.JPG'>

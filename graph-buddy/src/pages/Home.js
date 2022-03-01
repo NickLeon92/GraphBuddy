@@ -11,7 +11,7 @@ const Home = () => {
       <br />
       <br />
       <h2>
-        nothing here yet..
+        nothing here yet.. navigate to profile in the navbar or go to /me to make some graphs
       </h2>
       <br />
       <br />
