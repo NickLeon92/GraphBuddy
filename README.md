@@ -1,5 +1,5 @@
 # GraphBuddy
-create and save line graphs.
+create and save line graphs. 
 
 Here's the link to the deployed beta: https://graph-buddy.herokuapp.com
 
